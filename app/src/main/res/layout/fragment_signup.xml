@@ -6,312 +6,328 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.SignupFragment">
 
-    <com.certified.autopaper.customViews.BackButton
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:fontFamily="@font/sofia_sans_bold"
-        android:text="Create a Agent Account"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_20ssp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/btn_back"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:fontFamily="@font/sofia_sans_regular"
-        android:text="For the purpose of industry regulation, your details are required."
-        android:textSize="@dimen/_14ssp"
-        app:layout_constraintEnd_toEndOf="@+id/materialTextView2"
-        app:layout_constraintStart_toStartOf="@+id/materialTextView2"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_phone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        app:cardCornerRadius="@dimen/_4sdp"
-        app:layout_constraintEnd_toStartOf="@+id/card_email"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/materialTextView3"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="@dimen/_1sdp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_16sdp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView2"
+            <com.certified.autopaper.customViews.BackButton
+                android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:tint="@color/darkGrey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/materialTextView4"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_marginTop="@dimen/_16sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_phone" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:text="@string/phone"
-                android:textColor="@color/darkGrey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="20dp" />
+                android:layout_marginTop="@dimen/_32sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:fontFamily="@font/sofia_sans_bold"
+                android:text="Create a Agent Account"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/btn_back"
+                app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/sofia_sans_regular"
+                android:text="For the purpose of industry regulation, your details are required."
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView2"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
 
-    </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:cardCornerRadius="@dimen/_4sdp"
+                app:layout_constraintEnd_toStartOf="@+id/card_email"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView3"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
+                app:strokeColor="@color/grey"
+                app:strokeWidth="@dimen/_1sdp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="@dimen/_4sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/card_phone"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
-        app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="@dimen/_1sdp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:tint="@color/darkGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/materialTextView4"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_phone" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView3"
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        android:text="@string/phone"
+                        android:textColor="@color/darkGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_begin="20dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_email"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:tint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/materialTextView5"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card_phone"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/materialTextView5"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_email" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        android:text="@string/email"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_email_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_32sdp"
+                app:boxBackgroundColor="@color/et_bg_color"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/card_email"
+                app:layout_constraintStart_toStartOf="@+id/card_phone"
+                app:layout_constraintTop_toBottomOf="@+id/card_phone"
+                app:startIconDrawable="@drawable/ic_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:fontFamily="@font/sofia_sans_regular"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_password_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:boxBackgroundColor="@color/et_bg_color"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/card_email"
+                app:layout_constraintStart_toStartOf="@+id/card_phone"
+                app:layout_constraintTop_toBottomOf="@+id/et_email_layout"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:fontFamily="@font/sofia_sans_regular"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_confirm_password_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:boxBackgroundColor="@color/et_bg_color"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/card_email"
+                app:layout_constraintStart_toStartOf="@+id/card_phone"
+                app:layout_constraintTop_toBottomOf="@+id/et_password_layout"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:fontFamily="@font/sofia_sans_regular"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/checkbox_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:checked="true"
+                android:fontFamily="@font/sofia_sans_medium"
+                android:text="@string/i_agree_to_terms_amp_conditions"
+                android:textColor="@color/darkerGrey"
+                android:textSize="@dimen/_14ssp"
+                app:buttonTint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="@+id/et_confirm_password_layout"
+                app:layout_constraintTop_toBottomOf="@+id/et_confirm_password_layout" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_continue"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/sofia_sans_bold"
+                android:text="@string/_continue"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="@+id/et_password_layout"
+                app:layout_constraintStart_toStartOf="@+id/et_password_layout"
+                app:layout_constraintTop_toBottomOf="@+id/checkbox_terms" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sofia_sans_semi_bold"
+                android:text="Already have an account?"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_login"
+                app:layout_constraintEnd_toStartOf="@+id/btn_login"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_email" />
+                app:layout_constraintTop_toTopOf="@+id/btn_login" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView5"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:text="@string/email"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/sofia_sans_semi_bold"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_14ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/materialTextView6"
+                app:layout_constraintTop_toBottomOf="@+id/btn_continue" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="et_email_layout,et_password_layout,et_confirm_password_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_email_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        app:boxBackgroundColor="@color/et_bg_color"
-        app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-        app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-        app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-        app:boxCornerRadiusTopStart="@dimen/_6sdp"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:boxStrokeWidth="0dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/card_email"
-        app:layout_constraintStart_toStartOf="@+id/card_phone"
-        app:layout_constraintTop_toBottomOf="@+id/card_phone"
-        app:startIconDrawable="@drawable/ic_email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:fontFamily="@font/sofia_sans_regular"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:textColor="@color/black" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_password_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:boxBackgroundColor="@color/et_bg_color"
-        app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-        app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-        app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-        app:boxCornerRadiusTopStart="@dimen/_6sdp"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:boxStrokeWidth="0dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/card_email"
-        app:layout_constraintStart_toStartOf="@+id/card_phone"
-        app:layout_constraintTop_toBottomOf="@+id/et_email_layout"
-        app:passwordToggleEnabled="true"
-        app:startIconDrawable="@drawable/ic_password">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:fontFamily="@font/sofia_sans_regular"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:textColor="@color/black" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_confirm_password_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:boxBackgroundColor="@color/et_bg_color"
-        app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-        app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-        app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-        app:boxCornerRadiusTopStart="@dimen/_6sdp"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:boxStrokeWidth="0dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/card_email"
-        app:layout_constraintStart_toStartOf="@+id/card_phone"
-        app:layout_constraintTop_toBottomOf="@+id/et_password_layout"
-        app:passwordToggleEnabled="true"
-        app:startIconDrawable="@drawable/ic_password">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:fontFamily="@font/sofia_sans_regular"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:textColor="@color/black" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkbox_terms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:checked="true"
-        android:fontFamily="@font/sofia_sans_medium"
-        app:buttonTint="@color/colorPrimary"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/darkerGrey"
-        android:text="@string/i_agree_to_terms_amp_conditions"
-        app:layout_constraintStart_toStartOf="@+id/et_confirm_password_layout"
-        app:layout_constraintTop_toBottomOf="@+id/et_confirm_password_layout" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_continue"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/sofia_sans_bold"
-        android:text="@string/_continue"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_14ssp"
-        app:layout_constraintEnd_toEndOf="@+id/et_password_layout"
-        app:layout_constraintStart_toStartOf="@+id/et_password_layout"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_terms" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/sofia_sans_semi_bold"
-        android:text="Already have an account?"
-        android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_login"
-        app:layout_constraintEnd_toStartOf="@+id/btn_login"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_login" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/sofia_sans_semi_bold"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textSize="@dimen/_14ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/materialTextView6"
-        app:layout_constraintTop_toBottomOf="@+id/btn_continue" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="et_email_layout,et_password_layout" />
-
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
