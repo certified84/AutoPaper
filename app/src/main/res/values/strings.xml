@@ -22,4 +22,7 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="enter_your_email_address_to_receive_a_reset_code">Enter your email address to receive a reset code</string>
     <string name="send_code">Send Code</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="i_agree_to_terms_amp_conditions"><![CDATA[I agree to terms & conditions]]></string>
 </resources>
