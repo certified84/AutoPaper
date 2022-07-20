@@ -2,4 +2,8 @@
     <string name="app_name">AutoPaper</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skip">Skip</string>
+    <string name="sign_in_caps">SIGN IN</string>
+    <string name="sign_up_caps">SIGN UP</string>
+    <string name="get_started">Get Started</string>
 </resources>
