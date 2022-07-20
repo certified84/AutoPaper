@@ -10,6 +10,7 @@
 
     <color name="colorPrimary">#4778EC</color>
     <color name="colorPrimaryDark">#00257D</color>
+    <color name="colorAccent">#8692A6</color>
     <color name="grey">#dedcdc</color>
     <color name="darkGrey">#9E9E9E</color>
     <color name="et_bg_color">#E9E9E9</color>
