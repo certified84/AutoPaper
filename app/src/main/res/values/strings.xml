@@ -6,4 +6,14 @@
     <string name="sign_in_caps">SIGN IN</string>
     <string name="sign_up_caps">SIGN UP</string>
     <string name="get_started">Get Started</string>
+    <string name="hi_there">Hi There! 👋</string>
+    <string name="welcome_back_sign_in_to_your_account">Welcome back, Sign in to your account</string>
+    <string name="phone">Phone</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="continue">Continue</string>
+    <string name="_continue">Continue</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
