@@ -25,4 +25,9 @@
     <string name="login">Login</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="i_agree_to_terms_amp_conditions"><![CDATA[I agree to terms & conditions]]></string>
+    <string name="default_notification_channel_id">Cloud Notification</string>
+    <string name="default_notification_channel_name">AutoPaper Notification</string>
+    <string name="vehicle_registration_and_renewal_made_easy">Vehicle registration and renewal made easy...</string>
+    <string name="become_fast_and_efficient">Become fast and efficient.</string>
+    <string name="automated_free_reminders">"Automated free reminders "</string>
 </resources>

@@ -68,7 +68,9 @@
                 android:id="@+id/btn_get_started"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
+                android:visibility="gone"
                 android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:fontFamily="@font/sofia_sans_bold"
                 android:text="@string/get_started"
@@ -85,7 +87,7 @@
                 android:id="@+id/group_onboarding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="btn_skip,view_pager,page_indicator,btn_get_started" />
+                app:constraint_referenced_ids="btn_skip,view_pager,page_indicator" />
 
             <View
                 android:id="@+id/view"
