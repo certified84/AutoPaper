@@ -69,8 +69,8 @@ class OnboardingFragment : Fragment() {
                 })
             }
 
-            btnSignIn.setOnClickListener { findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToLoginFragment()) }
-            btnSignup.setOnClickListener { findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToSignupFragment()) }
+            btnSignIn.setOnClickListener { findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToLoginFragment("onboarding")) }
+            btnSignup.setOnClickListener { findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToSignupFragment("onboarding")) }
 
 //            fabNext.setOnClickListener {
 //                if (currentPosition != 3) currentPosition++

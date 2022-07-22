@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.certified.autopaper.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    private val args: LoginFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +27,27 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBack.setOnBackClickedListener {
-
+        binding.apply {
+            btnBack.setOnBackClickedListener {
+                when (args.from) {
+                    "signup" -> findNavController().navigate(
+                        LoginFragmentDirections.actionLoginFragmentToSignupFragment(
+                            "login"
+                        )
+                    )
+                    "onboarding" -> findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToOnboardingFragment())
+                }
+            }
+            btnChangePassword.setOnClickListener {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment())
+            }
+            btnSignup.setOnClickListener {
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToSignupFragment(
+                        "login"
+                    )
+                )
+            }
         }
     }
 
