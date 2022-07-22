@@ -6,7 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs'
     id 'dagger.hilt.android.plugin'
-//    id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
 
@@ -50,6 +50,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
