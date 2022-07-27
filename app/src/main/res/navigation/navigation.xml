@@ -73,6 +73,13 @@
         <argument
             android:name="from"
             app:argType="string" />
+        <action
+            android:id="@+id/action_loginFragment_to_OTPFragment"
+            app:destination="@id/OTPFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -117,5 +124,21 @@
             app:destination="@id/signupFragment"
             app:popUpTo="@id/signupFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_OTPFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="from"
+            app:argType="string" />
+        <argument
+            android:name="otpCode"
+            app:argType="string" />
+        <argument
+            android:name="verificationID"
+            app:argType="string" />
     </fragment>
 </navigation>

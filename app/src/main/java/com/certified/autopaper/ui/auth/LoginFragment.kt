@@ -48,9 +48,7 @@ class LoginFragment : Fragment() {
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                val code = credential.smsCode
-                if (code != null)
-                    verifyCode(code)
+//                No need to do anything here since the OTPFragment.kt handles OTP verification.
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
@@ -72,6 +70,13 @@ class LoginFragment : Fragment() {
             ) {
                 super.onCodeSent(verificationId, token)
                 _verificationId = verificationId
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToOTPFragment(
+                        "login",
+                        "",
+                        verificationId
+                    )
+                )
             }
         }
 
@@ -167,19 +172,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun verifyCode(code: String) {
-        val credential = PhoneAuthProvider.getCredential(_verificationId, code)
-        signInWithCredentials(credential)
-    }
-
-    private fun signInWithCredentials(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful)
-                Log.d("TAG", "signInWithCredentials: ${it.result}")
-            else Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
-        }
-    }
-
     private fun loginWithPhone(phoneNumber: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber("+234 $phoneNumber")       // Phone number to verify
@@ -188,6 +180,26 @@ class LoginFragment : Fragment() {
             .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    private fun verifyCode(code: String) {
+        val credential = PhoneAuthProvider.getCredential(_verificationId, code)
+        signInWithCredentials(credential)
+    }
+
+    private fun signInWithCredentials(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d("TAG", "signInWithCredentials: ${it.result}")
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToOTPFragment(
+                        "login",
+                        credential.smsCode!!,
+                        _verificationId
+                    )
+                )
+            } else Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
+        }
     }
 
     override fun onDestroyView() {
