@@ -12,7 +12,8 @@
     <color name="colorPrimaryDark">#00257D</color>
     <color name="colorAccent">#8692A6</color>
     <color name="et_bg_color">#E9E9E9</color>
-    <color name="grey">#dedcdc</color>
-    <color name="darkGrey">#9E9E9E</color>
-    <color name="darkerGrey">#696F79</color>
+    <color name="light_gray">#E5E5E5</color>
+    <color name="gray">#dedcdc</color>
+    <color name="dark_gray">#9E9E9E</color>
+    <color name="darker_gray">#696F79</color>
 </resources>

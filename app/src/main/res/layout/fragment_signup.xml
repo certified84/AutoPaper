@@ -65,7 +65,7 @@
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
-                app:strokeColor="@color/grey"
+                app:strokeColor="@color/gray"
                 app:strokeWidth="@dimen/_1sdp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,7 +80,7 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
-                        android:tint="@color/darkGrey"
+                        android:tint="@color/dark_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/materialTextView4"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -96,7 +96,7 @@
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/_16sdp"
                         android:text="@string/phone"
-                        android:textColor="@color/darkGrey"
+                        android:textColor="@color/dark_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -273,7 +273,7 @@
                 android:checked="true"
                 android:fontFamily="@font/sofia_sans_medium"
                 android:text="@string/i_agree_to_terms_amp_conditions"
-                android:textColor="@color/darkerGrey"
+                android:textColor="@color/darker_gray"
                 android:textSize="@dimen/_14ssp"
                 app:buttonTint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="@+id/et_confirm_password_layout"

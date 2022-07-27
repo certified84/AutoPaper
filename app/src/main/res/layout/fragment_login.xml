@@ -62,7 +62,7 @@
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
-                app:strokeColor="@color/grey"
+                app:strokeColor="@color/gray"
                 app:strokeWidth="@dimen/_1sdp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,16 +70,16 @@
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/appCompatImageView2"
+                        android:id="@+id/iv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_16sdp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_8sdp"
-                        android:tint="@color/darkGrey"
+                        android:tint="@color/dark_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/materialTextView4"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_phone"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
@@ -87,17 +87,17 @@
                         app:srcCompat="@drawable/ic_phone" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView4"
+                        android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/_16sdp"
                         android:text="@string/phone"
-                        android:textColor="@color/darkGrey"
+                        android:textColor="@color/dark_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+                        app:layout_constraintStart_toEndOf="@+id/iv_phone"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.Guideline
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/appCompatImageView3"
+                        android:id="@+id/iv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_16sdp"
@@ -139,7 +139,7 @@
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/materialTextView5"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_email"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +147,7 @@
                         app:srcCompat="@drawable/ic_email" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView5"
+                        android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
@@ -157,12 +157,44 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
+                        app:layout_constraintStart_toEndOf="@+id/iv_email"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_phone_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_32sdp"
+                app:boxBackgroundColor="@color/et_bg_color"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/card_email"
+                app:layout_constraintStart_toStartOf="@+id/card_phone"
+                app:layout_constraintTop_toBottomOf="@+id/card_phone"
+                app:startIconDrawable="@drawable/ic_phone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:fontFamily="@font/sofia_sans_regular"
+                    android:hint="@string/phone"
+                    android:inputType="phone"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/et_email_layout"
@@ -287,8 +319,16 @@
                 android:id="@+id/group_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="et_email_layout,et_password_layout"
+                app:constraint_referenced_ids="et_email_layout,et_password_layout,btn_change_password"
                 tools:visibility="invisible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_phone"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="et_phone_layout"
+                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
