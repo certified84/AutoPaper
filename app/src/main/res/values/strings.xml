@@ -32,7 +32,7 @@
     <string name="automated_free_reminders">"Automated free reminders "</string>
     <string name="what_would_you_like_to_do_today">What would you like to do today?</string>
     <string name="commission_balance">Commission Balance</string>
-    <string name="complete_sign_up_by_setting_up_profile">Complete sign up by setting up profile</string>
+    <string name="complete_sign_up_by_setting_up_profile">Complete signup by setting up profile</string>
     <string name="renew_vehicle_papers">Renew Vehicle Papers</string>
     <string name="new_vehicle_registration">New Vehicle Registration</string>
     <string name="other_vehicle_papers">Other Vehicle Papers</string>
@@ -44,4 +44,7 @@
     <string name="transactions">Transactions</string>
     <string name="on_going_registration_vehicle">Ongoing Registration Vehicle</string>
     <string name="registered_vehicles">Registered vehicles</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="vehicle">Vehicle</string>
 </resources>
