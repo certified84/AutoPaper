@@ -18,10 +18,17 @@ class LoginViewModel : ViewModel() {
     val success: LiveData<Boolean> get() = _success
 
     fun signInWithEmailAndPassword(email: String, password: String) {
-        Firebase.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-            _success.value = it.isSuccessful
+        val auth = Firebase.auth
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
-                uiState.set(UIState.SUCCESS)
+                if (auth.currentUser?.isEmailVerified == true) {
+                    uiState.set(UIState.SUCCESS)
+                    _success.value = true
+                } else {
+                    _message.value = "Check your email for a verification link"
+                    uiState.set(UIState.FAILURE)
+                    _success.value = false
+                }
             } else {
                 uiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${it.exception?.localizedMessage}"

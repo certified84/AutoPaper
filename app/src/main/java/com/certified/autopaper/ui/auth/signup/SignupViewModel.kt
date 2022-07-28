@@ -37,8 +37,10 @@ class SignupViewModel : ViewModel() {
                                 _message.value = task.exception?.localizedMessage
                             }
                         }
-                    } else
+                    } else {
+                        uiState.set(UIState.FAILURE)
                         _message.value = it.exception?.localizedMessage
+                    }
                 }
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)

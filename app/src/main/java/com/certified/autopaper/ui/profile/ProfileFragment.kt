@@ -38,6 +38,10 @@ class ProfileFragment : Fragment() {
             lifecycleOwner = this@ProfileFragment
             user = Agent("Samson Achiaga")
 
+            btnBack.setOnBackClickedListener {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToHomeFragment())
+            }
+
             cardLogout.setOnClickListener {
                 viewModel.uiState.set(UIState.LOADING)
                 auth.signOut()
