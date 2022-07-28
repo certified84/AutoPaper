@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.certified.autopaper.databinding.FragmentSplashBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -34,7 +36,10 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             delay(2000L)
-            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnboardingFragment())
+            if (Firebase.auth.currentUser != null)
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+            else
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnboardingFragment())
         }
     }
 

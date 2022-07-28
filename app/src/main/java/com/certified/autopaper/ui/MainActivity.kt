@@ -1,4 +1,4 @@
-package com.certified.autopaper
+package com.certified.autopaper.ui
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.certified.autopaper.R
 import com.certified.autopaper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

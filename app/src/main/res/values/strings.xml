@@ -27,7 +27,21 @@
     <string name="i_agree_to_terms_amp_conditions"><![CDATA[I agree to terms & conditions]]></string>
     <string name="default_notification_channel_id">Cloud Notification</string>
     <string name="default_notification_channel_name">AutoPaper Notification</string>
-    <string name="vehicle_registration_and_renewal_made_easy">Vehicle registration and renewal made easy...</string>
+    <string name="vehicle_registration_and_renewal_made_easy">Vehicle registration and renewal made easy…</string>
     <string name="become_fast_and_efficient">Become fast and efficient.</string>
     <string name="automated_free_reminders">"Automated free reminders "</string>
+    <string name="what_would_you_like_to_do_today">What would you like to do today?</string>
+    <string name="commission_balance">Commission Balance</string>
+    <string name="complete_sign_up_by_setting_up_profile">Complete sign up by setting up profile</string>
+    <string name="renew_vehicle_papers">Renew Vehicle Papers</string>
+    <string name="new_vehicle_registration">New Vehicle Registration</string>
+    <string name="other_vehicle_papers">Other Vehicle Papers</string>
+    <string name="add_vehicle">Add Vehicle</string>
+    <string name="refer_amp_earn"><![CDATA[Refer & Earn]]></string>
+    <string name="refer_amp_earn_1_000_00"><![CDATA[Refer & Earn ₦1,000.00]]></string>
+    <string name="referral_text">When you invite a friend to Autopaper using your invite link, you get one month free on your subscription.</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="transactions">Transactions</string>
+    <string name="on_going_registration_vehicle">Ongoing Registration Vehicle</string>
+    <string name="registered_vehicles">Registered vehicles</string>
 </resources>
