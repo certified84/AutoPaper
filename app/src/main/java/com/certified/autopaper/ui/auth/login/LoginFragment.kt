@@ -1,16 +1,22 @@
-package com.certified.autopaper.ui.auth
+package com.certified.autopaper.ui.auth.login
 
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.certified.autopaper.R
 import com.certified.autopaper.databinding.FragmentLoginBinding
+import com.certified.autopaper.util.Extensions.showToast
+import com.certified.autopaper.util.UIState
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -26,7 +32,41 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: LoginFragmentArgs by navArgs()
     private lateinit var auth: FirebaseAuth
-    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private val viewModel: LoginViewModel by viewModels()
+    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+//                No need to do anything here since the OTPFragment.kt handles OTP verification.
+        }
+
+        override fun onVerificationFailed(e: FirebaseException) {
+//                // This callback is invoked in an invalid request for verification is made,
+//                // for instance if the the phone number format is not valid.
+//                Log.w(TAG, "onVerificationFailed", e)
+//
+//                if (e is FirebaseAuthInvalidCredentialsException) {
+//                    // Invalid request
+//                } else if (e is FirebaseTooManyRequestsException) {
+//                    // The SMS quota for the project has been exceeded
+//                }
+            Log.d("TAG", "onVerificationFailed: ${e.localizedMessage}")
+        }
+
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken
+        ) {
+            super.onCodeSent(verificationId, token)
+            _verificationId = verificationId
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToOTPFragment(
+                    "login",
+                    "",
+                    verificationId
+                )
+            )
+        }
+    }
 
     private val required = "* Required"
     private lateinit var _verificationId: String
@@ -45,42 +85,25 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-//                No need to do anything here since the OTPFragment.kt handles OTP verification.
+        with(viewModel) {
+            success.observe(viewLifecycleOwner) {
+                if (it) {
+                    _success.postValue(false)
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                }
             }
-
-            override fun onVerificationFailed(e: FirebaseException) {
-//                // This callback is invoked in an invalid request for verification is made,
-//                // for instance if the the phone number format is not valid.
-//                Log.w(TAG, "onVerificationFailed", e)
-//
-//                if (e is FirebaseAuthInvalidCredentialsException) {
-//                    // Invalid request
-//                } else if (e is FirebaseTooManyRequestsException) {
-//                    // The SMS quota for the project has been exceeded
-//                }
-                Log.d("TAG", "onVerificationFailed: ${e.localizedMessage}")
-            }
-
-            override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
-            ) {
-                super.onCodeSent(verificationId, token)
-                _verificationId = verificationId
-                findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToOTPFragment(
-                        "login",
-                        "",
-                        verificationId
-                    )
-                )
+            message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
             }
         }
 
         binding.apply {
+            uiState = viewModel.uiState
+            lifecycleOwner = this@LoginFragment
+
             btnBack.setOnBackClickedListener {
                 when (args.from) {
                     "signup" -> findNavController().navigate(
@@ -113,6 +136,7 @@ class LoginFragment : Fragment() {
                         }
 
                         etPhoneLayout.error = null
+                        viewModel.uiState.set(UIState.LOADING)
                         loginWithPhone(phoneNumber)
                     }
                     "email" -> {
@@ -125,6 +149,14 @@ class LoginFragment : Fragment() {
                             return@setOnClickListener
                         }
 
+                        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                            binding.etEmailLayout.apply {
+                                error = "Enter a valid email"
+                                requestFocus()
+                                return@setOnClickListener
+                            }
+                        }
+
                         if (password.isBlank()) {
                             etPasswordLayout.error = required
                             etPassword.requestFocus()
@@ -133,6 +165,10 @@ class LoginFragment : Fragment() {
 
                         etEmailLayout.error = null
                         etPasswordLayout.error = null
+                        with(viewModel) {
+                            uiState.set(UIState.LOADING)
+                            signInWithEmailAndPassword(email, password)
+                        }
                     }
                 }
             }
@@ -182,24 +218,10 @@ class LoginFragment : Fragment() {
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    private fun verifyCode(code: String) {
-        val credential = PhoneAuthProvider.getCredential(_verificationId, code)
-        signInWithCredentials(credential)
-    }
-
-    private fun signInWithCredentials(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Log.d("TAG", "signInWithCredentials: ${it.result}")
-                findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToOTPFragment(
-                        "login",
-                        credential.smsCode!!,
-                        _verificationId
-                    )
-                )
-            } else Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
-        }
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility =
+            View.GONE
     }
 
     override fun onDestroyView() {
