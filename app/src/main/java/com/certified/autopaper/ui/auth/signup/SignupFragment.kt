@@ -1,4 +1,4 @@
-package com.certified.autopaper.ui.auth
+package com.certified.autopaper.ui.auth.signup
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.certified.autopaper.databinding.FragmentSignupBinding
+import com.certified.autopaper.util.UIState
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -25,12 +27,50 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
     private val args: SignupFragmentArgs by navArgs()
+    private val viewModel: SignupViewModel by viewModels()
     private lateinit var auth: FirebaseAuth
-    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     private val required = "* Required"
     private lateinit var _verificationId: String
     private var signupWith = "email"
+
+    private var callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+//                No need to do anything here since the OTPFragment.kt handles OTP verification.
+            viewModel.uiState.set(UIState.SUCCESS)
+        }
+
+        override fun onVerificationFailed(e: FirebaseException) {
+//                // This callback is invoked in an invalid request for verification is made,
+//                // for instance if the the phone number format is not valid.
+//                Log.w(TAG, "onVerificationFailed", e)
+//
+//                if (e is FirebaseAuthInvalidCredentialsException) {
+//                    // Invalid request
+//                } else if (e is FirebaseTooManyRequestsException) {
+//                    // The SMS quota for the project has been exceeded
+//                }
+            viewModel.uiState.set(UIState.FAILURE)
+            Log.d("TAG", "onVerificationFailed: ${e.localizedMessage}")
+        }
+
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken
+        ) {
+            super.onCodeSent(verificationId, token)
+            viewModel.uiState.set(UIState.SUCCESS)
+            _verificationId = verificationId
+            findNavController().navigate(
+                SignupFragmentDirections.actionSignupFragmentToOTPFragment(
+                    "signup",
+                    "",
+                    verificationId
+                )
+            )
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,40 +85,8 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-//                No need to do anything here since the OTPFragment.kt handles OTP verification.
-            }
-
-            override fun onVerificationFailed(e: FirebaseException) {
-//                // This callback is invoked in an invalid request for verification is made,
-//                // for instance if the the phone number format is not valid.
-//                Log.w(TAG, "onVerificationFailed", e)
-//
-//                if (e is FirebaseAuthInvalidCredentialsException) {
-//                    // Invalid request
-//                } else if (e is FirebaseTooManyRequestsException) {
-//                    // The SMS quota for the project has been exceeded
-//                }
-                Log.d("TAG", "onVerificationFailed: ${e.localizedMessage}")
-            }
-
-            override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
-            ) {
-                super.onCodeSent(verificationId, token)
-                _verificationId = verificationId
-                findNavController().navigate(
-                    SignupFragmentDirections.actionSignupFragmentToOTPFragment(
-                        "signup",
-                        "",
-                        verificationId
-                    )
-                )
-            }
-        }
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
 
         binding.apply {
             btnBack.setOnBackClickedListener {
@@ -110,7 +118,8 @@ class SignupFragment : Fragment() {
                         }
 
                         etPhoneLayout.error = null
-                        signInWithPhone(phoneNumber)
+                        viewModel.uiState.set(UIState.LOADING)
+                        signupWithPhone(phoneNumber)
                     }
                     "email" -> {
                         val email = etEmail.text.toString()
@@ -144,6 +153,7 @@ class SignupFragment : Fragment() {
                         etEmailLayout.error = null
                         etPasswordLayout.error = null
                         etConfirmPasswordLayout.error = null
+                        viewModel.uiState.set(UIState.LOADING)
                     }
                 }
             }
@@ -183,7 +193,7 @@ class SignupFragment : Fragment() {
         }
     }
 
-    private fun signInWithPhone(phoneNumber: String) {
+    private fun signupWithPhone(phoneNumber: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber("+234 $phoneNumber")       // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
