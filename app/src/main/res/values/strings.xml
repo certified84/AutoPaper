@@ -47,4 +47,11 @@
     <string name="profile">Profile</string>
     <string name="home">Home</string>
     <string name="vehicle">Vehicle</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="edit_your_personal_details">Edit your personal details</string>
+    <string name="plus">+</string>
+    <string name="bank_details">Bank Details</string>
+    <string name="add_a_bank_account_to_withdraw_your_commission">Add a bank account to withdraw your commission</string>
+    <string name="security">Security</string>
+    <string name="logout">Logout</string>
 </resources>
