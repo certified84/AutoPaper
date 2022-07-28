@@ -35,7 +35,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
-        binding.user = Agent("Samson Achiaga", "agent", "50000", false, 25, 5)
+        binding.user = Agent(
+            id = auth.currentUser!!.uid,
+            name = "Samson Achiaga",
+            accountNumber = "agent",
+            commissionBalance = "50000",
+            complete = false,
+            registeredVehicles = 25,
+            ongoingRegistration = 5
+        )
     }
 
     override fun onResume() {

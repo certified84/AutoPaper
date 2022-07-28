@@ -54,4 +54,16 @@
     <string name="add_a_bank_account_to_withdraw_your_commission">Add a bank account to withdraw your commission</string>
     <string name="security">Security</string>
     <string name="logout">Logout</string>
+    <string name="edit_personal_details">Edit Personal Details</string>
+    <string name="take_a_selfie">Take a selfie</string>
+    <string name="full_name">Full name*</string>
+    <string name="name_hint">e.g Samson Achiaga</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_hint">e.g 08136108482</string>
+    <string name="email_hint">e.g samson@autopaper.com</string>
+    <string name="select_state">Select State</string>
+    <string name="state_hint">e.g Oyo</string>
+    <string name="town_residence_hint">e.g Owolabani</string>
+    <string name="town_of_residence">Town of residence</string>
+    <string name="home_address">Home address</string>
 </resources>
