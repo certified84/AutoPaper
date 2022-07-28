@@ -1,4 +1,4 @@
-package com.certified.autopaper.ui.auth
+package com.certified.autopaper.ui.auth.otp
 
 import android.os.Bundle
 import android.util.Log
@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.certified.autopaper.databinding.FragmentOtpBinding
+import com.certified.autopaper.util.Extensions.showToast
+import com.certified.autopaper.util.UIState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -21,6 +24,7 @@ class OTPFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private val args: OTPFragmentArgs by navArgs()
+    private val viewModel: OTPViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +38,9 @@ class OTPFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.uiState = viewModel.uiState
+        binding.lifecycleOwner = this
 
         binding.apply {
             btnBack.setOnBackClickedListener {
@@ -60,6 +67,7 @@ class OTPFragment : Fragment() {
                 }
 
                 etOtpLayout.error = null
+                viewModel.uiState.set(UIState.LOADING)
                 verifyCode(otpCode)
             }
         }
@@ -72,9 +80,16 @@ class OTPFragment : Fragment() {
 
     private fun signInWithCredentials(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful)
-                Log.d("TAG", "signInWithCredentials: ${it.result}")
-            else Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
+            Log.d("TAG", "signInWithCredentials: ${it.result}")
+            Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
+            if (it.isSuccessful) {
+                viewModel.uiState.set(UIState.SUCCESS)
+                findNavController().navigate(OTPFragmentDirections.actionOTPFragmentToHomeFragment())
+            }
+            else {
+                viewModel.uiState.set(UIState.FAILURE)
+                showToast("An error occurred: ${it.exception?.localizedMessage}")
+            }
         }
     }
 

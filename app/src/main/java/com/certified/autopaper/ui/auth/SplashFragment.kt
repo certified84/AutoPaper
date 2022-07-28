@@ -8,7 +8,9 @@ import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.certified.autopaper.R
 import com.certified.autopaper.databinding.FragmentSplashBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
@@ -41,6 +43,12 @@ class SplashFragment : Fragment() {
             else
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnboardingFragment())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility =
+            View.GONE
     }
 
     override fun onDestroyView() {

@@ -60,7 +60,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:elevation="@dimen/_8sdp"
                     app:cardBackgroundColor="@color/colorPrimary"
@@ -73,7 +73,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/_10sdp">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/materialTextView10"
@@ -97,6 +98,7 @@
                             android:textSize="@dimen/_18ssp"
                             app:layout_constraintStart_toStartOf="@+id/materialTextView10"
                             app:layout_constraintTop_toBottomOf="@+id/materialTextView10"
+                            app:money_text="@{user.commissionBalance}"
                             tools:text="₦ 5000.00" />
 
                         <com.google.android.material.button.MaterialButton
@@ -139,7 +141,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sofia_sans_semi_bold"
-                            android:text="@{user.ongoingRegistration}"
+                            android:text="@{String.valueOf(user.ongoingRegistration)}"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_18ssp"
                             app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView8"
@@ -163,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:fontFamily="@font/sofia_sans_semi_bold"
-                            android:text="@{user.registeredVehicles}"
+                            android:text="@{String.valueOf(user.registeredVehicles)}"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_18ssp"
                             app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView8"
@@ -221,7 +223,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/materialCardView"
                     app:strokeColor="@color/black"
                     app:strokeWidth="@dimen/_1sdp"
-                    app:visible="@{user.complete}">
+                    app:visible="@{!user.complete}">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -319,7 +321,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_new"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     app:cardBackgroundColor="@color/colorPrimaryDarker"
@@ -330,8 +332,8 @@
                     app:layout_constraintTop_toTopOf="@+id/card_renew">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/appCompatImageView5"
@@ -366,7 +368,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_others"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     app:cardBackgroundColor="@color/colorPrimary"
@@ -374,11 +376,11 @@
                     app:layout_constraintBottom_toBottomOf="@+id/card_new"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/card_new"
-                    app:layout_constraintTop_toBottomOf="@+id/card_complete_signup">
+                    app:layout_constraintTop_toTopOf="@+id/card_new">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/appCompatImageView6"

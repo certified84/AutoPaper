@@ -1,118 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.auth.OTPFragment">
+<layout>
 
-    <ScrollView
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.certified.autopaper.util.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:context=".ui.auth.otp.OTPFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_16sdp">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.certified.autopaper.customViews.BackButton
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:paddingBottom="@dimen/_16sdp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_32sdp"
-                android:fontFamily="@font/sofia_sans_bold"
-                android:text="@string/activate_account"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp"
-                app:layout_constraintStart_toStartOf="@+id/btn_back"
-                app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+                <com.certified.autopaper.customViews.BackButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:fontFamily="@font/sofia_sans_regular"
-                android:text="@string/for_the_purpose_of_industry_regulation_your_details_are_required"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/materialTextView2"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:fontFamily="@font/sofia_sans_bold"
+                    android:text="@string/activate_account"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    app:layout_constraintStart_toStartOf="@+id/btn_back"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:fontFamily="@font/sofia_sans_medium"
-                android:text="@string/enter_otp"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintStart_toStartOf="@+id/materialTextView3"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_otp_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                app:boxBackgroundColor="@color/et_bg_color"
-                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-                app:boxCornerRadiusTopStart="@dimen/_6sdp"
-                app:boxStrokeColor="@color/colorPrimary"
-                app:boxStrokeWidth="0dp"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView7">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_otp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
                     android:fontFamily="@font/sofia_sans_regular"
-                    android:hint="@string/e_g_1234"
-                    android:inputType="number"
-                    android:paddingTop="@dimen/_8sdp"
-                    android:paddingBottom="@dimen/_8sdp"
-                    android:textColor="@color/black" />
+                    android:text="@string/for_the_purpose_of_industry_regulation_your_details_are_required"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/materialTextView2"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:fontFamily="@font/sofia_sans_medium"
+                    android:text="@string/enter_otp"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintStart_toStartOf="@+id/materialTextView3"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_continue"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_32sdp"
-                android:fontFamily="@font/sofia_sans_bold"
-                android:text="@string/_continue"
-                android:textAllCaps="false"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintEnd_toEndOf="@+id/et_otp_layout"
-                app:layout_constraintStart_toStartOf="@+id/et_otp_layout"
-                app:layout_constraintTop_toBottomOf="@+id/et_otp_layout" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_otp_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    app:boxBackgroundColor="@color/et_bg_color"
+                    app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                    app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:boxStrokeWidth="0dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView7">
 
-    </ScrollView>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_otp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:fontFamily="@font/sofia_sans_regular"
+                        android:hint="@string/e_g_1234"
+                        android:inputType="number"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        android:textColor="@color/black" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_continue"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:fontFamily="@font/sofia_sans_bold"
+                    android:text="@string/_continue"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintEnd_toEndOf="@+id/et_otp_layout"
+                    app:layout_constraintStart_toStartOf="@+id/et_otp_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/et_otp_layout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:progressTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{uiState == UIState.LOADING}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

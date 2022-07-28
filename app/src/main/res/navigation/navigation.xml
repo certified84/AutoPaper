@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/OTPFragment"
-        android:name="com.certified.autopaper.ui.auth.OTPFragment"
+        android:name="com.certified.autopaper.ui.auth.otp.OTPFragment"
         android:label="fragment_otp"
         tools:layout="@layout/fragment_otp">
         <action
