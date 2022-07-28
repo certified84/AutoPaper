@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.util.UIState
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
@@ -26,17 +29,7 @@ class SignupViewModel : ViewModel() {
             try {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { task ->
-                            _success.value = task.isSuccessful
-                            if (task.isSuccessful) {
-                                uiState.set(UIState.SUCCESS)
-                                _message.value = "Check your email for a verification link"
-                                auth.signOut()
-                            } else {
-                                uiState.set(UIState.FAILURE)
-                                _message.value = task.exception?.localizedMessage
-                            }
-                        }
+                        uploadDetails(auth.currentUser!!)
                     } else {
                         uiState.set(UIState.FAILURE)
                         _message.value = it.exception?.localizedMessage
@@ -50,14 +43,32 @@ class SignupViewModel : ViewModel() {
         }
     }
 
-//    fun signupWithPhone(phoneNumber: String) {
-//        val options = PhoneAuthOptions.newBuilder(auth)
-//            .setPhoneNumber("+234 $phoneNumber")       // Phone number to verify
-//            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-//            .setActivity(requireActivity())                 // Activity (for callback binding)
-//            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-//            .build()
-//        PhoneAuthProvider.verifyPhoneNumber(options)
-//    }
+    private fun uploadDetails(user: FirebaseUser) {
+        Firebase.firestore.collection("users").document(user.uid)
+            .set(Agent(id = user.uid, authType = "email"))
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    sendVerificationEmail(user)
+                } else {
+                    uiState.set(UIState.FAILURE)
+                    _success.value = false
+                    _message.value =
+                        "An error occurred: ${it.exception?.localizedMessage}"
+                }
+            }
+    }
 
+    private fun sendVerificationEmail(user: FirebaseUser) {
+        user.sendEmailVerification().addOnCompleteListener { task ->
+            _success.value = task.isSuccessful
+            if (task.isSuccessful) {
+                uiState.set(UIState.SUCCESS)
+                _message.value = "Check your email for a verification link"
+                Firebase.auth.signOut()
+            } else {
+                uiState.set(UIState.FAILURE)
+                _message.value = task.exception?.localizedMessage
+            }
+        }
+    }
 }

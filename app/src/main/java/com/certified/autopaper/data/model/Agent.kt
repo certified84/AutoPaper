@@ -3,7 +3,7 @@ package com.certified.autopaper.data.model
 data class Agent(
     val id: String = "",
     val name: String = "",
-    val photoUrl: String = "",
+    val photoUrl: String? = null,
     val phoneNumber: String = "",
     val email: String = "",
     val state: String = "",

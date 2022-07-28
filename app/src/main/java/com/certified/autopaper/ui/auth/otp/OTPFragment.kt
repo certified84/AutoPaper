@@ -39,6 +39,21 @@ class OTPFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(viewModel) {
+            success.observe(viewLifecycleOwner) {
+                if (it) {
+                    _success.postValue(false)
+                    findNavController().navigate(OTPFragmentDirections.actionOTPFragmentToHomeFragment())
+                }
+            }
+            message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
+            }
+        }
+
         binding.uiState = viewModel.uiState
         binding.lifecycleOwner = this
 
@@ -75,22 +90,7 @@ class OTPFragment : Fragment() {
 
     private fun verifyCode(code: String) {
         val credential = PhoneAuthProvider.getCredential(args.verificationID, code)
-        signInWithCredentials(credential)
-    }
-
-    private fun signInWithCredentials(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential).addOnCompleteListener {
-            Log.d("TAG", "signInWithCredentials: ${it.result}")
-            Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
-            if (it.isSuccessful) {
-                viewModel.uiState.set(UIState.SUCCESS)
-                findNavController().navigate(OTPFragmentDirections.actionOTPFragmentToHomeFragment())
-            }
-            else {
-                viewModel.uiState.set(UIState.FAILURE)
-                showToast("An error occurred: ${it.exception?.localizedMessage}")
-            }
-        }
+        viewModel.signInWithCredentials(credential)
     }
 
     override fun onDestroyView() {
