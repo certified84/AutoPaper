@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.certified.autopaper.databinding.FragmentSignupBinding
+import com.certified.autopaper.util.Extensions.showToast
 import com.certified.autopaper.util.UIState
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -85,6 +86,21 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(viewModel) {
+            message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
+            }
+            success.observe(viewLifecycleOwner) {
+                if (it) {
+                    _success.postValue(false)
+                    findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment("signup"))
+                }
+            }
+        }
+
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
 
@@ -154,6 +170,7 @@ class SignupFragment : Fragment() {
                         etPasswordLayout.error = null
                         etConfirmPasswordLayout.error = null
                         viewModel.uiState.set(UIState.LOADING)
+                        viewModel.createUserWithEmailAndPassword(email, password)
                     }
                 }
             }
