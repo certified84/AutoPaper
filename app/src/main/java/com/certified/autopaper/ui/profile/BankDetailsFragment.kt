@@ -33,6 +33,7 @@ class BankDetailsFragment : Fragment() {
     private lateinit var user: Agent
     private val token = "Bearer ${Config.PSTK_SECRET_KEY}"
     private lateinit var banks: Banks
+    private val required = "* Required"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +49,7 @@ class BankDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewModel) {
-            getBanks("Bearer ${Config.PSTK_SECRET_KEY}")
+            getBanks(token)
             message.observe(viewLifecycleOwner) {
                 if (it != null) {
                     showToast(it)
@@ -74,6 +75,40 @@ class BankDetailsFragment : Fragment() {
 
             btnBack.setOnBackClickedListener {
                 findNavController().navigate(BankDetailsFragmentDirections.actionBankDetailsFragmentToProfileFragment())
+            }
+
+            btnSave.setOnClickListener {
+                val bankName = etBankName.text.toString()
+                val accountNumber = etAccountNumber.text.toString()
+
+                if (bankName.isBlank()) {
+                    etBankNameLayout.error = required
+                    etBankName.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (accountNumber.isBlank()) {
+                    etAccountNumberLayout.error = required
+                    etAccountNumber.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (etName.text.toString().isBlank()) {
+                    showToast("Resolve account details first")
+                    return@setOnClickListener
+                }
+
+                etBankNameLayout.error = null
+                etAccountNumberLayout.error = null
+                with(viewModel) {
+                    bankDetailsUiState.set(UIState.LOADING)
+                    updateProfile(
+                        this@BankDetailsFragment.user.copy(
+                            bankName = bankName,
+                            accountNumber = accountNumber
+                        )
+                    )
+                }
             }
         }
     }
@@ -107,6 +142,7 @@ class BankDetailsFragment : Fragment() {
                     setOnItemClickListener { _, _, i, _ ->
 //                        Get the bank selected by the user
                         selected = it.data[i]
+                        etBankNameLayout.error = null
                         Log.d("TAG", "onItemSelected: Bank: $selected")
 //                        If the account number field is not empty and is equal to 10 characters, resolve the user account details using Paystack
                         if (etAccountNumber.text.toString()
@@ -115,7 +151,7 @@ class BankDetailsFragment : Fragment() {
                             with(viewModel) {
                                 bankDetailsUiState.set(UIState.LOADING)
                                 resolveAccount(
-                                    "Bearer ${Config.PSTK_SECRET_KEY}",
+                                    token,
                                     etAccountNumber.text.toString(),
                                     selected.code
                                 )
@@ -134,13 +170,13 @@ class BankDetailsFragment : Fragment() {
                                     with(viewModel) {
                                         bankDetailsUiState.set(UIState.LOADING)
                                         resolveAccount(
-                                            "Bearer ${Config.PSTK_SECRET_KEY}",
+                                            token,
                                             etAccountNumber.text.toString(),
                                             selected.code
                                         )
                                     }
                                 } else {
-                                    etBankNameLayout.error = "* Required"
+                                    etBankNameLayout.error = required
                                     etBankName.requestFocus()
                                 }
                             }

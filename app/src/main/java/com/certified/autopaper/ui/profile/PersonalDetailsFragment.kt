@@ -43,6 +43,7 @@ class PersonalDetailsFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
     private lateinit var user: Agent
+    private val required = "* Required"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,13 +102,31 @@ class PersonalDetailsFragment : Fragment() {
                 val homeAddress = etHomeAddress.text.toString()
 
                 if (name.isBlank()) {
-                    etNameLayout.error = "* Required"
+                    etNameLayout.error = required
                     etName.requestFocus()
                     return@setOnClickListener
                 }
 
+                if (state.isBlank()) {
+                    etStateLayout.error = required
+                    etState.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (townResidence.isBlank()) {
+                    etTownResidenceLayout.error = required
+                    etTownResidence.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (homeAddress.isBlank()) {
+                    etHomeAddressLayout.error = required
+                    etHomeAddress.requestFocus()
+                    return@setOnClickListener
+                }
+
                 with(viewModel) {
-                    uiState.set(UIState.LOADING)
+                    personalDetailsUiState.set(UIState.LOADING)
                     updateProfile(
                         user!!.copy(
                             name = name,
@@ -115,7 +134,8 @@ class PersonalDetailsFragment : Fragment() {
                             email = email,
                             state = state,
                             townResidence = townResidence,
-                            homeAddress = homeAddress
+                            homeAddress = homeAddress,
+                            complete = true
                         )
                     )
                 }
@@ -141,7 +161,7 @@ class PersonalDetailsFragment : Fragment() {
     }
 
     private fun launchCamera() {
-        viewModel.uiState.set(UIState.LOADING)
+        viewModel.personalDetailsUiState.set(UIState.LOADING)
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -151,7 +171,7 @@ class PersonalDetailsFragment : Fragment() {
     }
 
     private fun chooseFromGallery() {
-        viewModel.uiState.set(UIState.LOADING)
+        viewModel.personalDetailsUiState.set(UIState.LOADING)
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
@@ -192,7 +212,7 @@ class PersonalDetailsFragment : Fragment() {
     private fun uploadImage(uri: Uri?) {
         val path = "profileImages/${auth.currentUser!!.uid}/profileImage.jpg"
         viewModel.apply {
-            uiState.set(UIState.LOADING)
+            personalDetailsUiState.set(UIState.LOADING)
             uploadImage(uri, path)
             binding.ivProfileImage.load(uri) {
                 transformations(CircleCropTransformation())
