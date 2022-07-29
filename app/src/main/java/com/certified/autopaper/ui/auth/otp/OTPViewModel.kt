@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.util.UIState
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
@@ -29,27 +30,27 @@ class OTPViewModel : ViewModel() {
         viewModelScope.launch {
             val auth = Firebase.auth
             auth.signInWithCredential(credential).addOnCompleteListener {
-                Log.d("TAG", "signInWithCredentials: ${it.result}")
-                Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
                 if (it.isSuccessful) {
-                    uploadDetails(auth.currentUser!!.uid)
+                    Log.d("TAG", "signInWithCredentials: ${it.result}")
+                    uploadDetails(auth.currentUser!!)
                 } else {
                     uiState.set(UIState.FAILURE)
                     _success.value = false
                     _message.value = "An error occurred: ${it.exception?.localizedMessage}"
+                    Log.d("TAG", "signInWithCredentials: ${it.exception?.localizedMessage}")
                 }
             }
         }
     }
 
-    private fun uploadDetails(uid: String) {
+    private fun uploadDetails(user: FirebaseUser) {
         viewModelScope.launch {
-            val userRef = Firebase.firestore.collection("users").document(uid)
+            val userRef = Firebase.firestore.collection("users").document(user.uid)
             userRef.get().addOnCompleteListener {
                 if (it.isSuccessful) {
                     val document = it.result
                     if (!document.exists())
-                        upload(userRef, uid)
+                        upload(userRef, user)
                     else {
                         uiState.set(UIState.SUCCESS)
                         _success.value = true
@@ -63,8 +64,8 @@ class OTPViewModel : ViewModel() {
         }
     }
 
-    private fun upload(userRef: DocumentReference, uid: String) {
-        userRef.set(Agent(id = uid, authType = "phone"))
+    private fun upload(userRef: DocumentReference, user: FirebaseUser) {
+        userRef.set(Agent(id = user.uid, authType = "phone", phoneNumber = user.phoneNumber))
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     uiState.set(UIState.SUCCESS)

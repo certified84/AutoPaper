@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.certified.autopaper.R
 import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.databinding.FragmentProfileBinding
 import com.certified.autopaper.util.Extensions.showToast
@@ -48,7 +49,10 @@ class ProfileFragment : Fragment() {
                 user = it
                 binding.user = it
                 if (it != null && it.authType == "phone")
-                    binding.cardSecurity.isEnabled = false
+                    binding.cardSecurity.apply {
+                        isEnabled = false
+                        alpha = .5F
+                    }
             }
         }
 
@@ -69,6 +73,22 @@ class ProfileFragment : Fragment() {
             }
 
             cardLogout.setOnClickListener {
+                launchLogoutDialog()
+            }
+
+            cardSecurity.setOnClickListener {
+                launchPasswordChangeDialog()
+            }
+        }
+    }
+
+    private fun launchLogoutDialog() {
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setTitle("Logout")
+            setIcon(R.drawable.ic_logout)
+            setMessage("Are you sure you want to logout?")
+            setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
                 viewModel.uiState.set(UIState.LOADING)
                 auth.signOut()
                 findNavController().navigate(
@@ -77,10 +97,8 @@ class ProfileFragment : Fragment() {
                     )
                 )
             }
-
-            cardSecurity.setOnClickListener {
-                launchPasswordChangeDialog()
-            }
+            setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+            show()
         }
     }
 
