@@ -106,6 +106,7 @@ class ProfileViewModel @Inject constructor(
                         updateUserName(user.name)
                     } else {
                         personalDetailsUiState.set(UIState.FAILURE)
+                        bankDetailsUiState.set(UIState.FAILURE)
                         _message.value = "An error occurred: ${it.exception?.localizedMessage}"
                         Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
                     }
@@ -118,9 +119,11 @@ class ProfileViewModel @Inject constructor(
         Firebase.auth.currentUser?.updateProfile(profileChangeRequest)?.addOnCompleteListener {
             if (it.isSuccessful) {
                 personalDetailsUiState.set(UIState.SUCCESS)
+                bankDetailsUiState.set(UIState.SUCCESS)
                 _message.value = "Profile updated successfully"
             } else {
                 personalDetailsUiState.set(UIState.FAILURE)
+                bankDetailsUiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${it.exception?.localizedMessage}"
                 Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
             }
@@ -153,6 +156,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun getBanks(token: String) {
+        bankDetailsUiState.set(UIState.LOADING)
         viewModelScope.launch {
             try {
                 val response = repository.getBanks(token)

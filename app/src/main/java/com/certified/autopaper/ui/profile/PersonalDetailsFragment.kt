@@ -107,7 +107,7 @@ class PersonalDetailsFragment : Fragment() {
                 }
 
                 with(viewModel) {
-                    uiState.set(UIState.LOADING)
+                    personalDetailsUiState.set(UIState.LOADING)
                     updateProfile(
                         user!!.copy(
                             name = name,
@@ -141,7 +141,7 @@ class PersonalDetailsFragment : Fragment() {
     }
 
     private fun launchCamera() {
-        viewModel.uiState.set(UIState.LOADING)
+        viewModel.personalDetailsUiState.set(UIState.LOADING)
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -151,7 +151,7 @@ class PersonalDetailsFragment : Fragment() {
     }
 
     private fun chooseFromGallery() {
-        viewModel.uiState.set(UIState.LOADING)
+        viewModel.personalDetailsUiState.set(UIState.LOADING)
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
@@ -192,7 +192,7 @@ class PersonalDetailsFragment : Fragment() {
     private fun uploadImage(uri: Uri?) {
         val path = "profileImages/${auth.currentUser!!.uid}/profileImage.jpg"
         viewModel.apply {
-            uiState.set(UIState.LOADING)
+            personalDetailsUiState.set(UIState.LOADING)
             uploadImage(uri, path)
             binding.ivProfileImage.load(uri) {
                 transformations(CircleCropTransformation())
