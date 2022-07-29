@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.databinding.FragmentProfileBinding
 import com.certified.autopaper.util.Extensions.showToast
 import com.certified.autopaper.util.UIState
@@ -21,6 +22,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ProfileViewModel by activityViewModels()
     private lateinit var auth: FirebaseAuth
+    private lateinit var user: Agent
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +45,7 @@ class ProfileFragment : Fragment() {
                 }
             }
             userDetails.observe(viewLifecycleOwner) {
+                user = it
                 binding.user = it
                 if (it != null && it.authType == "phone")
                     binding.cardSecurity.isEnabled = false
@@ -55,6 +58,14 @@ class ProfileFragment : Fragment() {
 
             btnBack.setOnBackClickedListener {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToHomeFragment())
+            }
+
+            cardPersonalDetails.setOnClickListener {
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToPersonalDetailsFragment(
+                        user
+                    )
+                )
             }
 
             cardLogout.setOnClickListener {
@@ -96,6 +107,12 @@ class ProfileFragment : Fragment() {
             setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
         }
         materialDialog.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (auth.currentUser == null)
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToOnboardingFragment())
     }
 
     override fun onDestroyView() {

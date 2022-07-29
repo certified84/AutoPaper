@@ -45,7 +45,7 @@ class SignupViewModel : ViewModel() {
 
     private fun uploadDetails(user: FirebaseUser) {
         Firebase.firestore.collection("users").document(user.uid)
-            .set(Agent(id = user.uid, authType = "email"))
+            .set(Agent(id = user.uid, authType = "email", email = user.email!!))
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     sendVerificationEmail(user)

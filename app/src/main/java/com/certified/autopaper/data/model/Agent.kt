@@ -1,5 +1,9 @@
 package com.certified.autopaper.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Agent(
     val id: String = "",
     val name: String = "",
@@ -17,4 +21,4 @@ data class Agent(
     val complete: Boolean = false,
     val registeredVehicles: Int = 0,
     val ongoingRegistration: Int = 0,
-)
+) : Parcelable

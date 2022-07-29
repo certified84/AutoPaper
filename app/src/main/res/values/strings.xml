@@ -66,4 +66,5 @@
     <string name="town_residence_hint">e.g Owolabani</string>
     <string name="town_of_residence">Town of residence</string>
     <string name="home_address">Home address</string>
+    <string name="save">Save</string>
 </resources>

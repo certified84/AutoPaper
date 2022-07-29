@@ -63,6 +63,7 @@
                     android:layout_height="@dimen/_100sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:profileImage="@{user.photoUrl}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                     tools:src="@drawable/no_profile_image" />
@@ -118,6 +119,7 @@
                         android:layout_height="@dimen/_45sdp"
                         android:fontFamily="@font/sofia_sans_regular"
                         android:hint="@string/name_hint"
+                        android:text="@{user.name}"
                         android:inputType="textPersonName"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
@@ -164,6 +166,7 @@
                         android:fontFamily="@font/sofia_sans_regular"
                         android:hint="@string/phone_hint"
                         android:inputType="phone"
+                        android:text="@{user.phoneNumber}"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
                         android:textColor="@color/black" />
@@ -211,6 +214,7 @@
                         android:inputType="textEmailAddress"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
+                        android:text="@{user.email}"
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -253,8 +257,9 @@
                         android:layout_height="@dimen/_45sdp"
                         android:fontFamily="@font/sofia_sans_regular"
                         android:hint="@string/state_hint"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textPersonName"
                         android:paddingTop="@dimen/_8sdp"
+                        android:text="@{user.state}"
                         android:paddingBottom="@dimen/_8sdp"
                         android:textColor="@color/black" />
 
@@ -297,8 +302,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_45sdp"
                         android:fontFamily="@font/sofia_sans_regular"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textPersonName"
                         android:paddingTop="@dimen/_8sdp"
+                        android:text="@{user.townResidence}"
                         android:paddingBottom="@dimen/_8sdp"
                         android:textColor="@color/black" />
 
@@ -341,12 +347,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_45sdp"
                         android:fontFamily="@font/sofia_sans_regular"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textMultiLine"
+                        android:text="@{user.homeAddress}"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:text="@string/save"
+                    android:textSize="@dimen/_18ssp"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/sofia_sans_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_margin="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/et_home_address_layout"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
