@@ -28,10 +28,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
 
+@AndroidEntryPoint
 class PersonalDetailsFragment : Fragment() {
 
     private var _binding: FragmentPersonalDetailsBinding? = null

@@ -7,4 +7,6 @@ class PaystackRepository @Inject constructor(private val apiService: PaystackApi
 
     suspend fun resolveAccount(token: String, accountNumber: String, bankCode: String) =
         apiService.resolveAccount(token, accountNumber, bankCode)
+
+    suspend fun getBanks(token: String) = apiService.getBanks(token)
 }

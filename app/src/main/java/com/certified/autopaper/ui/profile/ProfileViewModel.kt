@@ -7,7 +7,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.certified.autopaper.data.model.AccountResolveResponse
 import com.certified.autopaper.data.model.Agent
+import com.certified.autopaper.data.model.Banks
+import com.certified.autopaper.data.repository.PaystackRepository
+import com.certified.autopaper.util.ApiErrorUtil
 import com.certified.autopaper.util.UIState
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.ktx.auth
@@ -15,10 +19,17 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class ProfileViewModel : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val repository: PaystackRepository,
+    private val apiErrorUtil: ApiErrorUtil
+) :
+    ViewModel() {
 
     val uiState = ObservableField(UIState.LOADING)
     val personalDetailsUiState = ObservableField(UIState.LOADING)
@@ -29,6 +40,12 @@ class ProfileViewModel : ViewModel() {
 
     val _message = MutableLiveData<String?>()
     val message: LiveData<String?> get() = _message
+
+    private val _accountDetails = MutableLiveData<AccountResolveResponse>()
+    val accountDetails: LiveData<AccountResolveResponse> get() = _accountDetails
+
+    private val _banks = MutableLiveData<Banks>()
+    val banks: LiveData<Banks> get() = _banks
 
     init {
         getUserDetails()
@@ -106,6 +123,53 @@ class ProfileViewModel : ViewModel() {
                 personalDetailsUiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${it.exception?.localizedMessage}"
                 Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
+            }
+        }
+    }
+
+    fun resolveAccount(token: String, accountNumber: String, bankCode: String) {
+        viewModelScope.launch {
+            try {
+                val response = repository.resolveAccount(token, accountNumber, bankCode)
+                Log.d("TAG", "resolveAccount: Code: ${response.code()}")
+                if (response.isSuccessful) {
+                    bankDetailsUiState.set(UIState.SUCCESS)
+                    _accountDetails.value = response.body()
+                    Log.d("TAG", "resolveAccount: Response: ${response.body()}")
+                } else {
+                    bankDetailsUiState.set(UIState.FAILURE)
+                    _accountDetails.value = AccountResolveResponse()
+                    val error = apiErrorUtil.parseError(response)
+                    _message.value = "An error occurred ${error?.error}"
+                    Log.d("TAG", "resolveAccount: Error: ${error?.error}")
+                }
+            } catch (e: Exception) {
+                bankDetailsUiState.set(UIState.FAILURE)
+                _accountDetails.value = AccountResolveResponse()
+                _message.value = "An error occurred: ${e.localizedMessage}"
+                Log.d("TAG", "resolveAccount: Exception: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun getBanks(token: String) {
+        viewModelScope.launch {
+            try {
+                val response = repository.getBanks(token)
+                if (response.isSuccessful) {
+                    bankDetailsUiState.set(UIState.SUCCESS)
+                    _banks.value = response.body()
+                    Log.d("TAG", "getBanks: Response: ${response.body()}")
+                } else {
+                    bankDetailsUiState.set(UIState.FAILURE)
+                    val error = apiErrorUtil.parseError(response)
+                    _message.value = error?.error
+                    Log.d("TAG", "getBanks: Error: ${error?.error}")
+                }
+            } catch (e: Exception) {
+                bankDetailsUiState.set(UIState.FAILURE)
+                _message.value = "An error occurred: ${e.localizedMessage}"
+                Log.d("TAG", "getBanks: Exception: ${e.localizedMessage}")
             }
         }
     }
