@@ -257,7 +257,7 @@
                         android:layout_height="@dimen/_45sdp"
                         android:fontFamily="@font/sofia_sans_regular"
                         android:hint="@string/state_hint"
-                        android:inputType="textPersonName"
+                        android:inputType="none"
                         android:paddingTop="@dimen/_8sdp"
                         android:text="@{user.state}"
                         android:paddingBottom="@dimen/_8sdp"
