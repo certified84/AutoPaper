@@ -71,7 +71,7 @@ class PersonalDetailsFragment : Fragment() {
 
         binding.apply {
             lifecycleOwner = this@PersonalDetailsFragment
-            uiState = viewModel.uiState
+            uiState = viewModel.personalDetailsUiState
 
             if (args.user?.authType == "phone")
                 etPhone.apply {

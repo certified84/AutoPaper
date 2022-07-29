@@ -67,4 +67,9 @@
     <string name="town_of_residence">Town of residence</string>
     <string name="home_address">Home address</string>
     <string name="save">Save</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="bank_hint">e.g Access Bank</string>
+    <string name="account_number">Account Number</string>
+    <string name="account_number_hint">e.g 0123456789</string>
+    <string name="name">Name</string>
 </resources>

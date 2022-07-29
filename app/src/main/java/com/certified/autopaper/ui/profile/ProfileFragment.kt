@@ -72,6 +72,14 @@ class ProfileFragment : Fragment() {
                 )
             }
 
+            cardBankDetails.setOnClickListener {
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToBankDetailsFragment(
+                        user
+                    )
+                )
+            }
+
             cardLogout.setOnClickListener {
                 launchLogoutDialog()
             }

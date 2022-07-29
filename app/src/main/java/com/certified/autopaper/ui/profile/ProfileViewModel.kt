@@ -14,13 +14,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class ProfileViewModel : ViewModel() {
+
     val uiState = ObservableField(UIState.LOADING)
+    val personalDetailsUiState = ObservableField(UIState.LOADING)
+    val bankDetailsUiState = ObservableField(UIState.LOADING)
 
     private val _userDetails = MutableLiveData<Agent>()
     val userDetails: LiveData<Agent> get() = _userDetails
@@ -57,12 +59,12 @@ class ProfileViewModel : ViewModel() {
 //                uploadImage(downloadUrl)?.await()
                 updateProfileImageUrl(downloadUrl.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        uiState.set(UIState.SUCCESS)
+                        personalDetailsUiState.set(UIState.SUCCESS)
                         _message.value = "Image uploaded successfully"
                     }
                 }
             } catch (e: Exception) {
-                uiState.set(UIState.FAILURE)
+                personalDetailsUiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${e.localizedMessage}"
                 Log.d("TAG", "uploadImage: Error: ${e.localizedMessage}")
             }
@@ -86,7 +88,7 @@ class ProfileViewModel : ViewModel() {
                     if (it.isSuccessful) {
                         updateUserName(user.name)
                     } else {
-                        uiState.set(UIState.FAILURE)
+                        personalDetailsUiState.set(UIState.FAILURE)
                         _message.value = "An error occurred: ${it.exception?.localizedMessage}"
                         Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
                     }
@@ -98,10 +100,10 @@ class ProfileViewModel : ViewModel() {
         val profileChangeRequest = userProfileChangeRequest { displayName = name }
         Firebase.auth.currentUser?.updateProfile(profileChangeRequest)?.addOnCompleteListener {
             if (it.isSuccessful) {
-                uiState.set(UIState.SUCCESS)
+                personalDetailsUiState.set(UIState.SUCCESS)
                 _message.value = "Profile updated successfully"
             } else {
-                uiState.set(UIState.FAILURE)
+                personalDetailsUiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${it.exception?.localizedMessage}"
                 Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
             }
