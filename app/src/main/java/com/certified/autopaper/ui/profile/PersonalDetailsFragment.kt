@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.databinding.FragmentPersonalDetailsBinding
 import com.certified.autopaper.util.Extensions.showToast
 import com.certified.autopaper.util.UIState
@@ -39,6 +40,7 @@ class PersonalDetailsFragment : Fragment() {
     private val args: PersonalDetailsFragmentArgs by navArgs()
     private lateinit var auth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
+    private lateinit var user: Agent
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +55,21 @@ class PersonalDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(viewModel) {
+            message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
+            }
+            userDetails.observe(viewLifecycleOwner) {
+                binding.user = it
+                user = it
+            }
+        }
+
         binding.apply {
-            user = args.user
             lifecycleOwner = this@PersonalDetailsFragment
             uiState = viewModel.uiState
 
@@ -74,6 +89,35 @@ class PersonalDetailsFragment : Fragment() {
             }
 
             ivProfileImage.setOnClickListener { launchChangeProfileImageDialog() }
+
+            btnSave.setOnClickListener {
+                val name = etName.text.toString()
+                val phoneNumber = etPhone.text.toString()
+                val email = etEmail.text.toString()
+                val state = etState.text.toString()
+                val townResidence = etTownResidence.text.toString()
+                val homeAddress = etHomeAddress.text.toString()
+
+                if (name.isBlank()) {
+                    etNameLayout.error = "* Required"
+                    etName.requestFocus()
+                    return@setOnClickListener
+                }
+
+                with(viewModel) {
+                    uiState.set(UIState.LOADING)
+                    updateProfile(
+                        user!!.copy(
+                            name = name,
+                            phoneNumber = phoneNumber,
+                            email = email,
+                            state = state,
+                            townResidence = townResidence,
+                            homeAddress = homeAddress
+                        )
+                    )
+                }
+            }
         }
     }
 
@@ -147,7 +191,7 @@ class PersonalDetailsFragment : Fragment() {
         val path = "profileImages/${auth.currentUser!!.uid}/profileImage.jpg"
         viewModel.apply {
             uiState.set(UIState.LOADING)
-            uploadImage(uri, path, storage, auth.currentUser!!.uid)
+            uploadImage(uri, path)
             binding.ivProfileImage.load(uri) {
                 transformations(CircleCropTransformation())
             }

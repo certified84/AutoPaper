@@ -205,7 +205,8 @@
                         android:inputType="phone"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -237,7 +238,8 @@
                         android:inputType="textEmailAddress"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -270,7 +272,8 @@
                         android:inputType="textPassword"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

@@ -15,6 +15,7 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -47,22 +48,23 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun uploadImage(uri: Uri?, path: String, storage: FirebaseStorage, userID: String) {
+    fun uploadImage(uri: Uri?, path: String) {
         viewModelScope.launch {
             try {
-                val profileImageRef = storage.reference.child(path)
+                val profileImageRef = Firebase.storage.reference.child(path)
                 profileImageRef.putFile(uri!!).await()
                 val downloadUrl = profileImageRef.downloadUrl.await()
 //                uploadImage(downloadUrl)?.await()
-                updateProfileImage(downloadUrl.toString()).await()
-                uiState.set(UIState.SUCCESS)
-//                _profileImage.value = downloadUrl.toString()
-                _message.value = "Image uploaded successfully"
+                updateProfileImageUrl(downloadUrl.toString()).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        uiState.set(UIState.SUCCESS)
+                        _message.value = "Image uploaded successfully"
+                    }
+                }
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${e.localizedMessage}"
                 Log.d("TAG", "uploadImage: Error: ${e.localizedMessage}")
-//                _profileImage.value = null
             }
         }
     }
@@ -72,8 +74,37 @@ class ProfileViewModel : ViewModel() {
         return Firebase.auth.currentUser?.updateProfile(profileChangeRequest)
     }
 
-    private fun updateProfileImage(imageUrl: String): Task<Void> {
+    private fun updateProfileImageUrl(imageUrl: String): Task<Void> {
         return Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid)
             .update("photoUrl", imageUrl)
+    }
+
+    fun updateProfile(user: Agent) {
+        viewModelScope.launch {
+            Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid)
+                .set(user).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        updateUserName(user.name)
+                    } else {
+                        uiState.set(UIState.FAILURE)
+                        _message.value = "An error occurred: ${it.exception?.localizedMessage}"
+                        Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
+                    }
+                }
+        }
+    }
+
+    private fun updateUserName(name: String) {
+        val profileChangeRequest = userProfileChangeRequest { displayName = name }
+        Firebase.auth.currentUser?.updateProfile(profileChangeRequest)?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                uiState.set(UIState.SUCCESS)
+                _message.value = "Profile updated successfully"
+            } else {
+                uiState.set(UIState.FAILURE)
+                _message.value = "An error occurred: ${it.exception?.localizedMessage}"
+                Log.d("TAG", "updateProfile: ${it.exception?.localizedMessage}")
+            }
+        }
     }
 }

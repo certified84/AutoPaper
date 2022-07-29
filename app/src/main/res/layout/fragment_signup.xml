@@ -208,7 +208,8 @@
                         android:inputType="phone"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -240,7 +241,8 @@
                         android:inputType="textEmailAddress"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -273,7 +275,8 @@
                         android:inputType="textPassword"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -306,7 +309,8 @@
                         android:inputType="textPassword"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -386,12 +390,12 @@
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:progressTint="@color/colorPrimary"
             android:indeterminate="true"
+            android:progressTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:visible="@{uiState == UIState.LOADING}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
