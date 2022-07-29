@@ -64,6 +64,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:profileImage="@{user.photoUrl}"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                     tools:src="@drawable/no_profile_image" />
 

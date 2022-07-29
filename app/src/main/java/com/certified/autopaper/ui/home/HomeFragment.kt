@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.certified.autopaper.R
 import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.databinding.FragmentHomeBinding
@@ -20,6 +21,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var auth: FirebaseAuth
+    private lateinit var user: Agent
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,17 +35,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
-        binding.uiState = viewModel.uiState
-        binding.user = Agent(
-            id = auth.currentUser!!.uid,
-            name = "Samson Achiaga",
-            accountNumber = "agent",
-            commissionBalance = "50000",
-            complete = false,
-            registeredVehicles = 25,
-            ongoingRegistration = 5
-        )
+
+        viewModel.userDetails.observe(viewLifecycleOwner) { binding.user = it }
+
+        binding.apply {
+            lifecycleOwner = this@HomeFragment
+            uiState = viewModel.uiState
+
+            cardCompleteSignup.setOnClickListener { findNavController().navigate(R.id.profileFragment) }
+        }
     }
 
     override fun onResume() {

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.certified.autopaper.data.model.Agent
 import com.certified.autopaper.databinding.FragmentProfileBinding
 import com.certified.autopaper.util.Extensions.showToast
 import com.certified.autopaper.util.UIState
@@ -35,10 +34,24 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(viewModel) {
+            message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
+            }
+            userDetails.observe(viewLifecycleOwner) {
+                binding.user = it
+                if (it != null && it.authType == "phone")
+                    binding.cardSecurity.isEnabled = false
+            }
+        }
+
         binding.apply {
             uiState = viewModel.uiState
             lifecycleOwner = this@ProfileFragment
-            user = Agent("Samson Achiaga")
 
             btnBack.setOnBackClickedListener {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToHomeFragment())
