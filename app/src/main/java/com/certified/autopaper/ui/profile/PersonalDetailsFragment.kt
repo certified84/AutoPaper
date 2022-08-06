@@ -1,5 +1,6 @@
 package com.certified.autopaper.ui.profile
 
+import android.R
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -11,6 +12,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -141,6 +143,18 @@ class PersonalDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val arrayAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.simple_spinner_dropdown_item,
+            resources.getStringArray(com.certified.autopaper.R.array.states)
+        )
+
+        binding.etState.setAdapter(arrayAdapter)
     }
 
     private fun launchChangeProfileImageDialog() {
