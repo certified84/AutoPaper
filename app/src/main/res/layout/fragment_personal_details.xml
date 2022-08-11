@@ -75,7 +75,7 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:fontFamily="@font/sofia_sans_medium"
                     android:text="@string/take_a_selfie"
-                    android:textColor="@color/darker_gray"
+                    android:textColor="@color/darker_grey"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sofia_sans_regular"
                     android:text="@string/full_name"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView23" />
@@ -136,7 +136,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sofia_sans_regular"
                     android:text="@string/phone_number"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_name_layout" />
@@ -183,7 +183,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sofia_sans_regular"
                     android:text="@string/email"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_phone_layout" />
@@ -230,7 +230,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sofia_sans_regular"
                     android:text="@string/select_state"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_email_layout" />
@@ -277,7 +277,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sofia_sans_regular"
                     android:text="@string/town_of_residence"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_state_layout" />
@@ -323,7 +323,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sofia_sans_regular"
                     android:text="@string/home_address"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_town_residence_layout" />

@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/_8sdp"
-    app:strokeColor="@color/gray"
+    app:strokeColor="@color/grey"
     app:strokeWidth="@dimen/_1sdp">
 
     <androidx.appcompat.widget.AppCompatImageView

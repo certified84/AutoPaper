@@ -48,7 +48,7 @@
         app:piv_padding="@dimen/_6sdp"
         app:piv_radius="@dimen/_6sdp"
         app:piv_selectedColor="@color/colorPrimary"
-        app:piv_unselectedColor="@color/gray"
+        app:piv_unselectedColor="@color/grey"
         app:piv_viewPager="@id/view_pager" />
 
     <com.google.android.material.button.MaterialButton

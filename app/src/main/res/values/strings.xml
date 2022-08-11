@@ -73,6 +73,13 @@
     <string name="account_number_hint">e.g 0123456789</string>
     <string name="name">Name</string>
     <string name="no_vehicle_added_yet">No Vehicle added yet</string>
+    <string name="vehicle_reg_no"><u>Vehicle reg. no.</u></string>
+    <string name="vehicle_reg_no_hint">e.g ZXY123AB</string>
+    <string name="chassis_number"><u>VIN/Chassis Number</u></string>
+    <string name="owners_info">Owners Info</string>
+    <string name="expiry_dates">Expiry Dates</string>
+    <string name="select_vehicle">Select Vehicle</string>
+    <string name="add_vehicle_button">Add Vehicle Button</string>
     <string-array name="states">
         <item>Abia</item>
         <item>Adamawa</item>
