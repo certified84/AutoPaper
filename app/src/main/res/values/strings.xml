@@ -80,6 +80,9 @@
     <string name="expiry_dates">Expiry Dates</string>
     <string name="select_vehicle">Select Vehicle</string>
     <string name="add_vehicle_button">Add Vehicle Button</string>
+    <string name="reg_no">Reg. no</string>
+    <string name="year">Year</string>
+    <string name="vehicle_model">Vehicle Model</string>
     <string-array name="states">
         <item>Abia</item>
         <item>Adamawa</item>
