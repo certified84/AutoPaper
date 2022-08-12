@@ -83,6 +83,18 @@
     <string name="reg_no">Reg. no</string>
     <string name="year">Year</string>
     <string name="vehicle_model">Vehicle Model</string>
+    <string name="required">Required</string>
+    <string name="customs_paper_or_receipt_showing_vin_chassis_number_amp_two_phone_numbers"><![CDATA[Customs Paper or Receipt (showing VIN / Chassis Number) & Two phone numbers]]></string>
+    <string name="timeline">Timeline</string>
+    <string name="new_registration_takes_48_hours_but_with_tint_permit_it_will_take_96_hours_with_next_day_delivery">New Registration takes 48 hours (but with Tint Permit, it will take 96 hours) with next-day delivery</string>
+    <string name="next">Next</string>
+    <string name="new_vehicle_papers">New Vehicle Papers</string>
+    <string name="preferences">Preferences</string>
+    <string name="documents">Documents</string>
+    <string name="comprehensive_insurance">Comprehensive Insurance</string>
+    <string name="it_takes_2_days_to_get_the_temporary_driving_document_and_40_days_to_get_the_original_license">It takes 2 days to get the temporary driving document and 40 days to get the original license</string>
+    <string name="you_need_to_upload_your_passport_photograph_and_a_clear_picture_of_your_current_expired_driver_s_license">You need to upload your passport photograph and a clear picture of your current expired driver\'s license</string>
+    <string name="drivers_licence_renewal">Drivers Licence Renewal</string>
     <string-array name="states">
         <item>Abia</item>
         <item>Adamawa</item>
